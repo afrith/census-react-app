@@ -14,6 +14,10 @@ query ($code: String!) {
     code
     name
     type { id name descrip }
+    fullParents { code name }
+    population
+    households
+    area
   }
 }
 `
