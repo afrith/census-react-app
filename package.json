@@ -4,10 +4,10 @@
   "license": "MIT",
   "author": "Adrian Frith <adrianf@da.org.za>",
   "scripts": {
-    "start": "razzle start",
+    "dev": "razzle start",
     "build": "razzle build",
     "test": "razzle test --env=jsdom",
-    "start:prod": "NODE_ENV=production node build/server.js"
+    "start": "NODE_ENV=production node build/server.js"
   },
   "dependencies": {
     "apollo-boost": "^0.4.4",
