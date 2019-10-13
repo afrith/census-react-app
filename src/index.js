@@ -2,7 +2,8 @@ import http from 'http'
 
 let app = require('./server').default
 
-const server = http.createServer(app)
+let currentHandler = app.callback()
+const server = http.createServer(currentHandler)
 
 let currentApp = app
 
@@ -21,10 +22,10 @@ if (module.hot) {
     console.log('🔁  HMR Reloading `./server`...')
 
     try {
-      app = require('./server').default
-      server.removeListener('request', currentApp)
-      server.on('request', app)
-      currentApp = app
+      const newHandler = require('./server').default.callback()
+      server.removeListener('request', currentHandler)
+      server.on('request', newHandler)
+      currentHandler = newHandler
     } catch (error) {
       console.error(error)
     }
