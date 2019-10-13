@@ -1,7 +1,8 @@
 {
-  "name": "my-razzle-app",
+  "name": "census-react-app",
   "version": "0.1.0",
   "license": "MIT",
+  "author": "Adrian Frith <adrianf@da.org.za>",
   "scripts": {
     "start": "razzle start",
     "build": "razzle build",
