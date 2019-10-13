@@ -7,7 +7,7 @@ import { ALL_PROVINCES } from '../lib/queries'
 const Home = () => {
   const { loading, error, data } = useQuery(ALL_PROVINCES)
 
-  if (error) return <p>Error. :(</p>
+  if (error) throw error
   if (loading) return <p>Loading...</p>
 
   return <>

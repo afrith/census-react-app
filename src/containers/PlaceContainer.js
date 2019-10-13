@@ -8,7 +8,7 @@ const Place = () => {
   const { code } = useParams()
   const { loading, error, data } = useQuery(PLACE_BY_CODE, { variables: { code } })
 
-  if (error) return <p>Error. :(</p>
+  if (error) throw error
   if (loading) return <p>Loading...</p>
 
   return <>
