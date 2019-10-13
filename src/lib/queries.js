@@ -17,3 +17,17 @@ query ($code: String!) {
   }
 }
 `
+
+export const PLACES_BY_NAME = gql`
+query ($name: String!) {
+  placesByName(name: $name) {
+    id
+    code
+    name
+    type { id descrip }
+    province { id name }
+    population
+    area
+  }
+}
+`

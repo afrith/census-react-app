@@ -10,7 +10,7 @@ const SearchForm = ({ defaultSearchText = '' }) => {
   const handleSubmit = (event) => {
     event.preventDefault()
     event.stopPropagation()
-    // TODO: actually search
+    history.push(`/search/${encodeURIComponent(searchText.trim())}`)
   }
 
   return (
