@@ -3,9 +3,10 @@ import React from 'react'
 import { StaticRouter } from 'react-router-dom'
 import Koa from 'koa'
 import koaStatic from 'koa-static'
-import helmet from 'koa-helmet'
+import koaHelmet from 'koa-helmet'
 import Router from 'koa-router'
 import { ApolloProvider, renderToStringWithData } from 'react-apollo'
+import { Helmet } from 'react-helmet'
 import { createClient } from './lib/apollo'
 
 const assets = require(process.env.RAZZLE_ASSETS_MANIFEST)
@@ -27,6 +28,7 @@ router.get('/*',
 
     ctx.state.markup = markup
     ctx.state.apolloState = client.extract()
+    ctx.state.helmet = Helmet.renderStatic()
 
     return context.url ? ctx.redirect(context.url) : next()
   },
@@ -37,7 +39,7 @@ router.get('/*',
         <head>
             <meta http-equiv="X-UA-Compatible" content="IE=edge" />
             <meta charset="utf-8" />
-            <title>Welcome to Razzle</title>
+            ${ctx.state.helmet.title.toString()}
             <meta name="viewport" content="width=device-width, initial-scale=1">
             ${
               assets.client.css
@@ -62,7 +64,7 @@ router.get('/*',
 
 const server = new Koa()
 server
-  .use(helmet())
+  .use(koaHelmet())
   .use(koaStatic(process.env.RAZZLE_PUBLIC_DIR))
   .use(router.routes())
   .use(router.allowedMethods())
