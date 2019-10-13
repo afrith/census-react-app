@@ -2,7 +2,8 @@ import App from './App'
 import React from 'react'
 import { StaticRouter } from 'react-router-dom'
 import express from 'express'
-import { renderToString } from 'react-dom/server'
+import { ApolloProvider, renderToStringWithData } from 'react-apollo'
+import { createClient } from './lib/apollo'
 
 const assets = require(process.env.RAZZLE_ASSETS_MANIFEST)
 
@@ -10,13 +11,19 @@ const server = express()
 server
   .disable('x-powered-by')
   .use(express.static(process.env.RAZZLE_PUBLIC_DIR))
-  .get('/*', (req, res) => {
+  .get('/*', async (req, res) => {
     const context = {}
-    const markup = renderToString(
-      <StaticRouter context={context} location={req.url}>
-        <App />
-      </StaticRouter>
+    const client = createClient()
+
+    const markup = await renderToStringWithData(
+      <ApolloProvider client={client}>
+        <StaticRouter context={context} location={req.url}>
+          <App />
+        </StaticRouter>
+      </ApolloProvider>
     )
+
+    const initialApolloState = client.extract()
 
     if (context.url) {
       res.redirect(context.url)
@@ -42,6 +49,9 @@ server
     </head>
     <body>
         <div id="root">${markup}</div>
+        <script>
+          window.__APOLLO_STATE__ = ${JSON.stringify(initialApolloState).replace(/</g, "\\u003c")}
+        </script>
     </body>
 </html>`
       )
