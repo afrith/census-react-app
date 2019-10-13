@@ -1,11 +1,9 @@
 import http from 'http'
 
-let app = require('./server').default
+const app = require('./server').default
 
 let currentHandler = app.callback()
 const server = http.createServer(currentHandler)
-
-let currentApp = app
 
 server.listen(process.env.PORT || 3000, error => {
   if (error) {

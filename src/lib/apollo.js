@@ -12,7 +12,7 @@ export const createClient = () => {
     cache: process.browser
       ? new InMemoryCache().restore(window.__APOLLO_STATE__)
       : new InMemoryCache()
-  });
+  })
 
-  return client;
+  return client
 }
