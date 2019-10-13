@@ -96,15 +96,21 @@ const PlaceInfo = ({ place }) => {
 }
 
 const PlaceView = ({ place, loading }) => {
-  return (
-    <>
-      <Helmet>
-        <title>{place ? `Census 2011: ${place.type.descrip}: ${place.name}` : 'Census 2011'}</title>
-      </Helmet>
-      {(place && !loading) ? <PlaceInfo place={place} /> : <LoadingSpinner />}
-    </>
-  )
-
+  if (loading || !place) {
+    return (
+      <>
+        <Helmet><title>Census 2011</title></Helmet>
+        <LoadingSpinner />
+      </>
+    )
+  } else {
+    return (
+      <>
+        <Helmet><title>{`Census 2011: ${place.type.descrip}: ${place.name}`}</title></Helmet>
+        <PlaceInfo place={place} />
+      </>
+    )
+  }
 }
 
 export default PlaceView
