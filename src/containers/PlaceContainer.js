@@ -3,13 +3,14 @@ import { useParams, Link } from 'react-router-dom'
 import { useQuery } from 'react-apollo'
 import { Helmet } from 'react-helmet'
 import { PLACE_BY_CODE } from '../lib/queries'
+import { LoadingSpinner } from '../presentation/spinners'
 
 const Place = () => {
   const { code } = useParams()
   const { loading, error, data } = useQuery(PLACE_BY_CODE, { variables: { code } })
 
   if (error) throw error
-  if (loading) return <p>Loading...</p>
+  if (loading) return <LoadingSpinner />
 
   return <>
     <Helmet>

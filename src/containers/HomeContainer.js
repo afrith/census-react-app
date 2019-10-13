@@ -3,12 +3,13 @@ import { useQuery } from 'react-apollo'
 import { Link } from 'react-router-dom'
 import { Helmet } from 'react-helmet'
 import { ALL_PROVINCES } from '../lib/queries'
+import { LoadingSpinner } from '../presentation/spinners'
 
 const Home = () => {
   const { loading, error, data } = useQuery(ALL_PROVINCES)
 
   if (error) throw error
-  if (loading) return <p>Loading...</p>
+  if (loading) return <LoadingSpinner />
 
   return <>
     <Helmet>
