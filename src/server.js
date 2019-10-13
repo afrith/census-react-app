@@ -6,8 +6,8 @@ import koaStatic from 'koa-static'
 import koaHelmet from 'koa-helmet'
 import Router from 'koa-router'
 import { ApolloProvider, renderToStringWithData } from 'react-apollo'
-import { Helmet } from 'react-helmet'
 import { createClient } from './lib/apollo'
+import { HelmetProvider } from 'react-helmet-async'
 
 const assets = require(process.env.RAZZLE_ASSETS_MANIFEST)
 
@@ -17,18 +17,21 @@ router.get('/*',
   async (ctx, next) => {
     const context = {}
     const client = createClient()
+    const helmetContext = {}
 
     const markup = await renderToStringWithData(
       <ApolloProvider client={client}>
         <StaticRouter context={context} location={ctx.url}>
-          <App />
+          <HelmetProvider context={helmetContext}>
+            <App />
+          </HelmetProvider>
         </StaticRouter>
       </ApolloProvider>
     )
 
     ctx.state.markup = markup
     ctx.state.apolloState = client.extract()
-    ctx.state.helmet = Helmet.renderStatic()
+    ctx.state.helmet = helmetContext.helmet
 
     return context.url ? ctx.redirect(context.url) : next()
   },
