@@ -35,7 +35,7 @@ const PlaceInfo = ({ place }) => {
         </Col>
 
         <Col lg={6}>
-          <div class="small-map" id="place-map" style={{ height: '300px' }}>
+          <div className='small-map' id='place-map' style={{ height: '300px' }}>
             ...map goes here...
           </div>
           <div>
