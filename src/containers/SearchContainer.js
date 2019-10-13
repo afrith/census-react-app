@@ -2,6 +2,7 @@ import React from 'react'
 import { useParams } from 'react-router-dom'
 import { useQuery } from 'react-apollo'
 import { PLACES_BY_NAME } from '../lib/queries'
+import SearchView from '../presentation/SearchView'
 
 const SearchContainer = () => {
   const { name } = useParams()
@@ -9,7 +10,7 @@ const SearchContainer = () => {
 
   if (error) throw error
 
-  return <pre>{JSON.stringify(data, null, 2)}</pre>
+  return <SearchView name={name} loading={loading} places={data && data.placesByName} />
 }
 
 export default SearchContainer
