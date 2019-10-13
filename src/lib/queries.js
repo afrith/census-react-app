@@ -18,6 +18,10 @@ query ($code: String!) {
     population
     households
     area
+    demographics {
+      name
+      values { label value }
+    }
   }
 }
 `

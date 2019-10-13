@@ -3,10 +3,42 @@ import { Helmet } from 'react-helmet-async'
 import { Link } from 'react-router-dom'
 import { LinkContainer } from 'react-router-bootstrap'
 import Breadcrumb from 'react-bootstrap/Breadcrumb'
+import Table from 'react-bootstrap/Table'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import { LoadingSpinner } from './spinners'
-import { formatInt, formatDec } from '../lib/formats'
+import { formatInt, formatDec, formatPerc } from '../lib/formats'
+
+const DemogTable = ({ header, values }) => {
+  const applicableValues = values.filter(v => v.label !== 'Not applicable').sort((a, b) => b.value - a.value)
+  const naValues = values.filter(v => v.label === 'Not applicable')
+  const total = applicableValues.reduce((acc, cur) => acc + cur.value, 0)
+  const displayValues = [...applicableValues, ...naValues].filter(v => v.value > 0)
+
+  return (
+    <>
+      <h4>{header}</h4>
+      <Table>
+        <thead>
+          <tr>
+            <th></th>
+            <th className='text-right'>People</th>
+            <th className='text-right'>Percentage</th>
+          </tr>
+        </thead>
+        <tbody>
+          {displayValues.map(v => (
+            <tr key={v.label}>
+              <td>{v.label}</td>
+              <td className='text-right'>{formatInt(v.value)}</td>
+              <td className='text-right'>{formatPerc(v.value / total)}</td>
+            </tr>
+          ))}
+        </tbody>
+      </Table>
+    </>
+  )
+}
 
 const PlaceInfo = ({ place }) => {
   return (
@@ -45,6 +77,17 @@ const PlaceInfo = ({ place }) => {
             </small>
           </div>
         </Col>
+      </Row>
+
+      <Row>
+        {place.population > 0 && (
+          <Col lg={6}>
+            {['Gender', 'Population group', 'First language'].map(name => {
+              const data = place.demographics.find(d => d.name === name)
+              return data && <DemogTable header={data.name} values={data.values} />
+            })}
+          </Col>
+        )}
       </Row>
 
       <pre>{JSON.stringify(place, null, 2)}</pre>
