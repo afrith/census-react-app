@@ -6,3 +6,14 @@ query {
     id code name
   }
 }`
+
+export const PLACE_BY_CODE = gql`
+query ($code: String!) {
+  placeByCode(code: $code) {
+    id
+    code
+    name
+    type { id name descrip }
+  }
+}
+`

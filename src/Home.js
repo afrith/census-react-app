@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { useQuery } from 'react-apollo'
+import { Link } from 'react-router-dom'
 import { ALL_PROVINCES } from './lib/queries'
 
 const Home = () => {
@@ -9,7 +10,13 @@ const Home = () => {
   if (loading) return <p>Loading...</p>
 
   return <>
-    <pre>{JSON.stringify(data, null, 2)}</pre>
+    <ul>
+      {data.allProvinces.map(({ code, name }) => (
+        <li key={code}>
+          <Link to={`/place/${code}`}>{name}</Link>
+        </li>
+      ))}
+    </ul>
   </>
 }
 
