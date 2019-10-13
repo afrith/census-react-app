@@ -5,10 +5,7 @@ const app = require('./server').default
 let currentHandler = app.callback()
 const server = http.createServer(currentHandler)
 
-const getEnv = c => process.env[c]
-const port = getEnv('PORT') || 3000
-
-server.listen(port, error => {
+server.listen(process.env.PORT || 3000, error => {
   if (error) {
     console.log(error)
   }
