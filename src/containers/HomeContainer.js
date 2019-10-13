@@ -3,7 +3,7 @@ import { useQuery } from 'react-apollo'
 import { ALL_PROVINCES } from '../lib/queries'
 import HomeView from '../presentation/HomeView'
 
-const Home = () => {
+const HomeContainer = () => {
   const { loading, error, data } = useQuery(ALL_PROVINCES)
 
   if (error) throw error
@@ -11,4 +11,4 @@ const Home = () => {
   return <HomeView loading={loading} provinces={data && data.allProvinces} />
 }
 
-export default Home
+export default HomeContainer

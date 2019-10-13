@@ -4,7 +4,7 @@ import { useQuery } from 'react-apollo'
 import { PLACE_BY_CODE } from '../lib/queries'
 import PlaceView from '../presentation/PlaceView'
 
-const Place = () => {
+const PlaceContainer = () => {
   const { code } = useParams()
   const { loading, error, data } = useQuery(PLACE_BY_CODE, { variables: { code } })
 
@@ -13,4 +13,4 @@ const Place = () => {
   return <PlaceView loading={loading} place={data && data.placeByCode} />
 }
 
-export default Place
+export default PlaceContainer
