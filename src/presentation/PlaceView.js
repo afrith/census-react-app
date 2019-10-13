@@ -95,13 +95,13 @@ const PlaceInfo = ({ place }) => {
   )
 }
 
-const PlaceView = ({ place }) => {
+const PlaceView = ({ place, loading }) => {
   return (
     <>
       <Helmet>
         <title>{place ? `Census 2011: ${place.type.descrip}: ${place.name}` : 'Census 2011'}</title>
       </Helmet>
-      {place ? <PlaceInfo place={place} /> : <LoadingSpinner />}
+      {(place && !loading) ? <PlaceInfo place={place} /> : <LoadingSpinner />}
     </>
   )
 
