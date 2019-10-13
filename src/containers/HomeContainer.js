@@ -2,7 +2,7 @@ import React from 'react'
 import { useQuery } from 'react-apollo'
 import { Link } from 'react-router-dom'
 import { Helmet } from 'react-helmet'
-import { ALL_PROVINCES } from './lib/queries'
+import { ALL_PROVINCES } from '../lib/queries'
 
 const Home = () => {
   const { loading, error, data } = useQuery(ALL_PROVINCES)

@@ -2,7 +2,7 @@ import React from 'react'
 import { useParams, Link } from 'react-router-dom'
 import { useQuery } from 'react-apollo'
 import { Helmet } from 'react-helmet'
-import { PLACE_BY_CODE } from './lib/queries'
+import { PLACE_BY_CODE } from '../lib/queries'
 
 const Place = () => {
   const { code } = useParams()
