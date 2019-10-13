@@ -18,6 +18,7 @@ const SearchForm = ({ defaultSearchText = '' }) => {
       <Form.Group className='mr-sm-2'>
         <Form.Control
           type='text'
+          name='q'
           placeholder="Enter a place name"
           value={searchText}
           onChange={event => setSearchText(event.target.value)}
