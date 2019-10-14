@@ -1,5 +1,18 @@
-import { ApolloClient, InMemoryCache, HttpLink } from 'apollo-boost'
+import { ApolloClient, HttpLink } from 'apollo-boost'
+import { InMemoryCache, defaultDataIdFromObject } from 'apollo-cache-inmemory'
+
 import fetch from 'isomorphic-fetch'
+
+const dataIdFromObject = object => {
+  switch (object.__typename) {
+    case 'Place':
+      return `Place:${object.code}`
+    case 'PlaceType':
+      return `PlaceType:${object.name}`
+    default:
+      return defaultDataIdFromObject(object)
+  }
+}
 
 export const createClient = () => {
   const client = new ApolloClient({
@@ -10,8 +23,8 @@ export const createClient = () => {
       fetch
     }),
     cache: process.browser
-      ? new InMemoryCache().restore(window.__APOLLO_STATE__)
-      : new InMemoryCache()
+      ? new InMemoryCache({ dataIdFromObject }).restore(window.__APOLLO_STATE__)
+      : new InMemoryCache({ dataIdFromObject })
   })
 
   return client
