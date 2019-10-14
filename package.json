@@ -3,6 +3,10 @@
   "version": "0.1.0",
   "license": "MIT",
   "author": "Adrian Frith <adrianf@da.org.za>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/afrith/census-react-app.git"
+  },
   "scripts": {
     "dev": "razzle start",
     "build": "razzle build",
