@@ -14,7 +14,7 @@ query ($code: String!) {
     name
     type { name descrip }
     fullParents { code name }
-    children { code name }
+    children { code name population area }
     population
     households
     area

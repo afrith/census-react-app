@@ -8,6 +8,7 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import { LoadingSpinner } from './spinners'
 import { formatInt, formatDec, formatPerc } from '../lib/formats'
+import { compareString } from '../lib/utils'
 
 const DemogTable = ({ header, values }) => {
   const applicableValues = values.filter(v => v.label !== 'Not applicable').sort((a, b) => b.value - a.value)
@@ -38,6 +39,15 @@ const DemogTable = ({ header, values }) => {
       </Table>
     </>
   )
+}
+
+const childNames = {
+  province: 'Districts',
+  district: 'Local Municipalities',
+  metro: 'Main Places',
+  local: 'Main Places',
+  dma: 'Main Places',
+  mainplace: 'Sub Places'
 }
 
 const PlaceInfo = ({ place }) => {
@@ -79,7 +89,7 @@ const PlaceInfo = ({ place }) => {
         </Col>
       </Row>
 
-      <Row>
+      <Row className='mt-3'>
         {place.population > 0 && (
           <Col lg={6}>
             {['Gender', 'Population group', 'First language'].map(name => {
@@ -88,9 +98,32 @@ const PlaceInfo = ({ place }) => {
             })}
           </Col>
         )}
-      </Row>
 
-      <pre>{JSON.stringify(place, null, 2)}</pre>
+        {place.children.length > 0 && (
+          <Col lg={6}>
+            <h4>{childNames[place.type.name]}</h4>
+
+            <Table>
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th class='text-right'>Population</th>
+                  <th class='text-right'>Area (km²)</th>
+                </tr>
+              </thead>
+              <tbody>
+                {place.children.sort((a, b) => compareString(a.name.toUpperCase(), b.name.toUpperCase())).map(c => (
+                  <tr key={c.code}>
+                    <td><Link to={`/place/${c.code}`}>{c.name}</Link></td>
+                    <td className='text-right'>{formatInt(c.population)}</td>
+                    <td className='text-right'>{formatDec(c.area)}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </Table>
+          </Col>
+        )}
+      </Row>
     </>
   )
 }
