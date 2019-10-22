@@ -59,7 +59,7 @@ router.get('/*',
         <body>
             <div id="root">${ctx.state.markup}</div>
             <script>
-              window.__APOLLO_STATE__ = ${JSON.stringify(ctx.state.apolloState).replace(/</g, "\\u003c")}
+              window.__APOLLO_STATE__ = ${JSON.stringify(ctx.state.apolloState).replace(/</g, '\\u003c')}
             </script>
         </body>
       </html>`

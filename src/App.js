@@ -14,14 +14,17 @@ const App = () => (
         <Route exact path='/'><HomeContainer /></Route>
         <Route path='/place/:code'><PlaceContainer /></Route>
         <Route path='/search/:name'><SearchContainer /></Route>
-        <Route path='/search' render={({ location }) => {
-          const query = parse(location.search).q
-          if (query) return <Redirect to={`/search/${encodeURIComponent(query.trim())}`} />
-          else return <Redirect to='/' />
-        }} />
+        <Route
+          path='/search'
+          render={({ location }) => {
+            const query = parse(location.search).q
+            if (query) return <Redirect to={`/search/${encodeURIComponent(query.trim())}`} />
+            else return <Redirect to='/' />
+          }}
+        />
       </Switch>
     </ErrorBoundary>
   </Layout>
-);
+)
 
 export default App

@@ -107,8 +107,8 @@ const PlaceInfo = ({ place }) => {
               <thead>
                 <tr>
                   <th>Name</th>
-                  <th class='text-right'>Population</th>
-                  <th class='text-right'>Area (km²)</th>
+                  <th className='text-right'>Population</th>
+                  <th className='text-right'>Area (km²)</th>
                 </tr>
               </thead>
               <tbody>
