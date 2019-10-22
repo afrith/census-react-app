@@ -62,7 +62,7 @@ const PlaceInfo = ({ place }) => {
       <Row>
         <Col lg={6}>
           <h2>
-            {place.name}{' '}
+            {place.name}<br />
             <small className='text-muted'>{place.type.descrip} {place.code} from Census 2011</small>
           </h2>
 
