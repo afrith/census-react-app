@@ -41,7 +41,7 @@ const HomeView = ({ loading, provinces }) => {
 
       <h1>Census 2011</h1>
 
-      <p>This site provides online access to a selection of results from South Africa's <a href="http://www.statssa.gov.za/?page_id=3839">Census 2011</a> down to the “sub place” layer of detail, as released in the Community Profile Database DVD set. Please note the <a href="#footer">disclaimer</a> at the foot of this page.</p>
+      <p>This site provides online access to a selection of results from South Africa's <a href='http://www.statssa.gov.za/?page_id=3839'>Census 2011</a> down to the “sub place” layer of detail, as released in the Community Profile Database DVD set. Please note the <a href='#footer'>disclaimer</a> at the foot of this page.</p>
 
       <Row>
         <Col lg={6}>
@@ -50,12 +50,12 @@ const HomeView = ({ loading, provinces }) => {
           <SearchForm />
 
           <h2>Navigate</h2>
-          
+
           <p>You can select one of the provinces below and then navigate further down the hierarchy of places.</p>
 
-          {(!loading && provinces) ? <ProvinceTable provinces={provinces} /> : <LoadingSpinner/>}
+          {(!loading && provinces) ? <ProvinceTable provinces={provinces} /> : <LoadingSpinner />}
         </Col>
-          
+
         <Col lg={6}>
           <h2>Place types</h2>
 

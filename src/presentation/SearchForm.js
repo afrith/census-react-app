@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
@@ -19,7 +19,7 @@ const SearchForm = ({ defaultSearchText = '' }) => {
         <Form.Control
           type='text'
           name='q'
-          placeholder="Enter a place name"
+          placeholder='Enter a place name'
           value={searchText}
           onChange={event => setSearchText(event.target.value)}
         />

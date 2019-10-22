@@ -39,7 +39,7 @@ const SearchView = ({ name, loading, places }) => {
   return (
     <>
       <Helmet><title>Census 2011: Search Results: “{name}”</title></Helmet>
-      
+
       <Breadcrumb>
         <LinkContainer to='/'><Breadcrumb.Item>Home</Breadcrumb.Item></LinkContainer>
         <Breadcrumb.Item active aria-current='page'>Search for “{name}”</Breadcrumb.Item>

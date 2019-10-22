@@ -22,7 +22,7 @@ const DemogTable = ({ header, values }) => {
       <Table>
         <thead>
           <tr>
-            <th></th>
+            <th />
             <th className='text-right'>People</th>
             <th className='text-right'>Percentage</th>
           </tr>
@@ -58,7 +58,7 @@ const PlaceInfo = ({ place }) => {
         {place.fullParents.map(p => <LinkContainer key={p.code} to={`/place/${p.code}`}><Breadcrumb.Item>{p.name}</Breadcrumb.Item></LinkContainer>)}
         <Breadcrumb.Item active>{place.name}</Breadcrumb.Item>
       </Breadcrumb>
-      
+
       <Row>
         <Col lg={6}>
           <h2>
@@ -70,9 +70,9 @@ const PlaceInfo = ({ place }) => {
             <dt>Area</dt>
             <dd>{formatDec(place.area)} km²</dd>
             <dt>Population</dt>
-            <dd>{formatInt(place.population)} ({formatDec(place.population/place.area)} per km²)</dd>
+            <dd>{formatInt(place.population)} ({formatDec(place.population / place.area)} per km²)</dd>
             <dt>Households</dt>
-            <dd>{formatInt(place.households)} ({formatDec(place.households/place.area)} per km²)</dd>
+            <dd>{formatInt(place.households)} ({formatDec(place.households / place.area)} per km²)</dd>
           </dl>
         </Col>
 
