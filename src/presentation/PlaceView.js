@@ -11,7 +11,7 @@ import { formatInt, formatDec, formatPerc } from '../lib/formats'
 import { compareString } from '../lib/utils'
 
 const DemogTable = ({ header, values }) => {
-  const applicableValues = values.filter(v => v.label !== 'Not applicable').sort((a, b) => b.value - a.value)
+  const applicableValues = values.filter(v => v.label !== 'Not applicable').sort((a, b) => b.value - a.value || compareString(a.label, b.label))
   const naValues = values.filter(v => v.label === 'Not applicable')
   const total = applicableValues.reduce((acc, cur) => acc + cur.value, 0)
   const displayValues = [...applicableValues, ...naValues].filter(v => v.value > 0)
