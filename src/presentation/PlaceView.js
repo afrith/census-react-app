@@ -33,7 +33,7 @@ const DemogTable = ({ header, values }) => {
             <tr key={v.label}>
               <td>{v.label}</td>
               <td className='text-right'>{formatInt(v.value)}</td>
-              <td className='text-right'>{formatPerc(v.value / total)}</td>
+              <td className='text-right'>{v.label === 'Not applicable' ? '' : formatPerc(v.value / total)}</td>
             </tr>
           ))}
         </tbody>
