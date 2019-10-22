@@ -26,6 +26,16 @@ query ($code: String!) {
 }
 `
 
+export const GEOM_BY_CODE = gql`
+query ($code: String!) {
+  placeByCode(code: $code) {
+    code
+    geom
+    children { code geom }
+  }
+}
+`
+
 export const PLACES_BY_NAME = gql`
 query ($name: String!) {
   placesByName(name: $name) {

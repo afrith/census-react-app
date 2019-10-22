@@ -1,6 +1,9 @@
 import React from 'react'
 import { Route, Switch, Redirect } from 'react-router-dom'
 import { parse } from 'query-string'
+import 'leaflet/dist/leaflet.css'
+import './App.css'
+
 import HomeContainer from './containers/HomeContainer'
 import PlaceContainer from './containers/PlaceContainer'
 import SearchContainer from './containers/SearchContainer'

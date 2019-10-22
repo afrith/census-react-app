@@ -7,6 +7,7 @@ import Table from 'react-bootstrap/Table'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import { LoadingSpinner } from './spinners'
+import PlaceMap from './PlaceMap'
 import { formatInt, formatDec, formatPerc } from '../lib/formats'
 import { compareString } from '../lib/utils'
 
@@ -50,7 +51,7 @@ const childNames = {
   mainplace: 'Sub Places'
 }
 
-const PlaceInfo = ({ place }) => {
+const PlaceInfo = ({ place, map }) => {
   return (
     <>
       <Breadcrumb>
@@ -78,7 +79,7 @@ const PlaceInfo = ({ place }) => {
 
         <Col lg={6}>
           <div className='small-map' id='place-map' style={{ height: '300px' }}>
-            ...map goes here...
+            {map}
           </div>
           <div>
             <small>
@@ -128,7 +129,7 @@ const PlaceInfo = ({ place }) => {
   )
 }
 
-const PlaceView = ({ place, loading }) => {
+const PlaceView = ({ place, loading, geom, geomLoading }) => {
   if (loading || !place) {
     return (
       <>
@@ -137,10 +138,11 @@ const PlaceView = ({ place, loading }) => {
       </>
     )
   } else {
+    const map = geomLoading ? <LoadingSpinner /> : <PlaceMap key={place.code} geom={geom} />
     return (
       <>
         <Helmet><title>{`Census 2011: ${place.type.descrip}: ${place.name}`}</title></Helmet>
-        <PlaceInfo place={place} />
+        <PlaceInfo place={place} map={map} />
       </>
     )
   }
