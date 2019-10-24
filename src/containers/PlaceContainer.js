@@ -9,6 +9,16 @@ const PlaceContainer = () => {
   const { loading, error, data } = useQuery(PLACE_BY_CODE, { variables: { code } })
   const { loading: geomLoading, error: geomError, data: geomData } = useQuery(GEOM_BY_CODE, { variables: { code }, ssr: false })
 
+  const childGeoms = geomData && {
+    type: 'FeatureCollection',
+    features: geomData.placeByCode.children.map(c => ({
+      type: 'Feature',
+      id: c.code,
+      properties: { code: c.code, name: c.name },
+      geometry: c.geom
+    }))
+  }
+
   if (error) throw error
   if (geomError) throw geomError
 
@@ -18,6 +28,7 @@ const PlaceContainer = () => {
       place={data && data.placeByCode}
       geomLoading={geomLoading}
       geom={geomData && geomData.placeByCode.geom}
+      childGeoms={childGeoms}
     />
   )
 }

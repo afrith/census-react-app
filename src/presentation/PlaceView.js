@@ -129,7 +129,7 @@ const PlaceInfo = ({ place, map }) => {
   )
 }
 
-const PlaceView = ({ place, loading, geom, geomLoading }) => {
+const PlaceView = ({ place, loading, geom, childGeoms, geomLoading }) => {
   if (loading || !place) {
     return (
       <>
@@ -138,7 +138,7 @@ const PlaceView = ({ place, loading, geom, geomLoading }) => {
       </>
     )
   } else {
-    const map = geomLoading ? <LoadingSpinner /> : <PlaceMap key={place.code} geom={geom} />
+    const map = geomLoading ? <LoadingSpinner /> : <PlaceMap key={place.code} geom={geom} childGeoms={childGeoms} />
     return (
       <>
         <Helmet><title>{`Census 2011: ${place.type.descrip}: ${place.name}`}</title></Helmet>

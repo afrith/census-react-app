@@ -30,8 +30,9 @@ export const GEOM_BY_CODE = gql`
 query ($code: String!) {
   placeByCode(code: $code) {
     code
+    name
     geom
-    children { code geom }
+    children { code name geom }
   }
 }
 `
