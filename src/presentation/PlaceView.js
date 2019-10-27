@@ -8,6 +8,7 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import { LoadingSpinner } from './spinners'
 import PlaceMap from './PlaceMap'
+import Footer from './Footer'
 import { formatInt, formatDec, formatPerc } from '../lib/formats'
 import { compareString } from '../lib/utils'
 
@@ -145,6 +146,7 @@ const PlaceView = ({ place, loading, geom, childGeoms, geomLoading }) => {
       <>
         <Helmet><title>{`Census 2011: ${place.type.descrip}: ${place.name}`}</title></Helmet>
         <PlaceInfo place={place} map={map} />
+        <Footer />
       </>
     )
   }

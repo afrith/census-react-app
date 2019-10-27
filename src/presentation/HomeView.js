@@ -6,6 +6,7 @@ import Col from 'react-bootstrap/Col'
 import Table from 'react-bootstrap/Table'
 import { LoadingSpinner } from './spinners'
 import SearchForm from './SearchForm'
+import Footer from './Footer'
 import { formatInt } from '../lib/formats'
 import { compareString } from '../lib/utils'
 
@@ -70,6 +71,7 @@ const HomeView = ({ loading, provinces }) => {
           </dl>
         </Col>
       </Row>
+      <Footer />
     </>
   )
 }
