@@ -9,6 +9,8 @@ const { Map, TileLayer, GeoJSON, Popup } = process.env.BUILD_TARGET === 'client'
 const PlaceMap = ({ geom, childGeoms }) => {
   const [popup, setPopup] = useState()
 
+  if (process.env.BUILD_TARGET !== 'client') return <div />
+
   const bb = bbox(geom)
   const bounds = [[bb[1], bb[0]], [bb[3], bb[2]]]
 
