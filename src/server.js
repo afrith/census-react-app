@@ -8,10 +8,33 @@ import Router from 'koa-router'
 import { ApolloProvider, renderToStringWithData } from 'react-apollo'
 import { createClient } from './lib/apollo'
 import { HelmetProvider } from 'react-helmet-async'
+import { request as graphqlRequest } from 'graphql-request'
+import { makeFeatureFromPlace } from './lib/geom'
+import tokml from 'tokml'
 
 const assets = require(process.env.RAZZLE_ASSETS_MANIFEST)
 
 const router = new Router()
+
+router.get('/place/:code/kml', async ctx => {
+  const query = `query ($code: String!) {
+    placeByCode(code: $code) {
+      code
+      name
+      type { descrip }
+      geom
+    }
+  }`
+  const data = await graphqlRequest(process.env.RAZZLE_API_URL, query, { code: ctx.params.code })
+
+  const feature = makeFeatureFromPlace(data.placeByCode)
+  feature.properties.description = `${data.placeByCode.type.descrip} ${data.placeByCode.code}`
+  const kml = tokml(feature)
+
+  ctx.set('Content-Type', 'application/vnd.google-earth.kml+xml')
+  ctx.set('Content-Disposition', `attachment; filename=${data.placeByCode.code}.kml`)
+  ctx.body = kml
+})
 
 router.get('/*',
   async (ctx, next) => {
