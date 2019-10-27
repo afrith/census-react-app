@@ -1,9 +1,9 @@
 import React from 'react'
 import Spinner from 'react-bootstrap/Spinner'
 
-export const LoadingSpinner = () => (
+export const LoadingSpinner = ({ message = 'Loading...' }) => (
   <div>
     <Spinner animation='border' role='status' />{' '}
-    <span>Loading...</span>
+    <span>{message}</span>
   </div>
 )
