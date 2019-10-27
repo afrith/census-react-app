@@ -31,6 +31,8 @@ query ($code: String!) {
   placeByCode(code: $code) {
     code
     name
+    type { name descrip }
+    fullParents { code name }
     geom
     children { code name geom }
   }

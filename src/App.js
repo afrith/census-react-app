@@ -7,6 +7,7 @@ import './App.css'
 
 import HomeContainer from './containers/HomeContainer'
 import PlaceContainer from './containers/PlaceContainer'
+import BigmapContainer from './containers/BigmapContainer'
 import SearchContainer from './containers/SearchContainer'
 import ErrorBoundary from './containers/ErrorBoundary'
 import Layout from './presentation/Layout'
@@ -16,6 +17,7 @@ const App = () => (
     <ErrorBoundary>
       <Switch>
         <Route exact path='/'><HomeContainer /></Route>
+        <Route path='/place/:code/map'><BigmapContainer /></Route>
         <Route path='/place/:code'><PlaceContainer /></Route>
         <Route path='/search/:name'><SearchContainer /></Route>
         <Route
