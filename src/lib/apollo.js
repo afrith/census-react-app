@@ -7,8 +7,6 @@ const dataIdFromObject = object => {
   switch (object.__typename) {
     case 'Place':
       return `Place:${object.code}`
-    case 'PlaceType':
-      return `PlaceType:${object.name}`
     default:
       return defaultDataIdFromObject(object)
   }

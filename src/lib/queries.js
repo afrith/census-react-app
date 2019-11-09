@@ -3,7 +3,7 @@ import gql from 'graphql-tag'
 export const ALL_PROVINCES = gql`
 query {
   allProvinces {
-    code name population area type { name descrip }
+    code name population area type { id descrip }
   }
 }`
 
@@ -12,7 +12,7 @@ query ($code: String!) {
   placeByCode(code: $code) {
     code
     name
-    type { name descrip }
+    type { id descrip }
   }
 }
 `
@@ -22,9 +22,9 @@ query ($code: String!) {
   placeByCode(code: $code) {
     code
     name
-    type { name descrip }
-    fullParents { code name type { name descrip } }
-    children { code name type { name descrip } population area }
+    type { id descrip }
+    fullParents { code name type { id descrip } }
+    children { code name type { id descrip } population area }
     population
     households
     area
@@ -41,7 +41,7 @@ query ($code: String!) {
   placeByCode(code: $code) {
     code
     name
-    type { name descrip }
+    type { id descrip }
     fullParents { code name }
     geom
     children { code name geom }
@@ -54,7 +54,7 @@ query ($name: String!) {
   placesByName(name: $name) {
     code
     name
-    type { name descrip }
+    type { id descrip }
     province { code name }
     population
     area
