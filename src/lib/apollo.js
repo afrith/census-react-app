@@ -14,6 +14,13 @@ const dataIdFromObject = object => {
   }
 }
 
+const cacheRedirects = {
+  Query: {
+    placeByCode: (_, args, { getCacheKey }) =>
+      getCacheKey({ __typename: 'Place', code: args.code })
+  }
+}
+
 export const createClient = () => {
   const client = new ApolloClient({
     connectToDevTools: process.browser,
@@ -23,8 +30,8 @@ export const createClient = () => {
       fetch
     }),
     cache: process.browser
-      ? new InMemoryCache({ dataIdFromObject }).restore(window.__APOLLO_STATE__)
-      : new InMemoryCache({ dataIdFromObject })
+      ? new InMemoryCache({ dataIdFromObject, cacheRedirects }).restore(window.__APOLLO_STATE__)
+      : new InMemoryCache({ dataIdFromObject, cacheRedirects })
   })
 
   return client

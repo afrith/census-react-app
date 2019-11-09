@@ -52,12 +52,12 @@ const childNames = {
   mainplace: 'Sub Places'
 }
 
-const PlaceInfo = ({ place, map }) => {
+const PlaceInfo = ({ place, map, loading }) => {
   return (
     <>
       <Breadcrumb>
         <LinkContainer to='/'><Breadcrumb.Item>Home</Breadcrumb.Item></LinkContainer>
-        {place.fullParents.map(p => <LinkContainer key={p.code} to={`/place/${p.code}`}><Breadcrumb.Item>{p.name}</Breadcrumb.Item></LinkContainer>)}
+        {!loading && place.fullParents.map(p => <LinkContainer key={p.code} to={`/place/${p.code}`}><Breadcrumb.Item>{p.name}</Breadcrumb.Item></LinkContainer>)}
         <Breadcrumb.Item active>{place.name}</Breadcrumb.Item>
       </Breadcrumb>
 
@@ -68,14 +68,18 @@ const PlaceInfo = ({ place, map }) => {
             <small className='text-muted'>{place.type.descrip} {place.code} from Census 2011</small>
           </h2>
 
-          <dl>
-            <dt>Area</dt>
-            <dd>{formatDec(place.area)} km²</dd>
-            <dt>Population</dt>
-            <dd>{formatInt(place.population)} ({formatDec(place.population / place.area)} per km²)</dd>
-            <dt>Households</dt>
-            <dd>{formatInt(place.households)} ({formatDec(place.households / place.area)} per km²)</dd>
-          </dl>
+          {loading
+            ? <LoadingSpinner message='Data loading...' />
+            : (
+              <dl>
+                <dt>Area</dt>
+                <dd>{formatDec(place.area)} km²</dd>
+                <dt>Population</dt>
+                <dd>{formatInt(place.population)} ({formatDec(place.population / place.area)} per km²)</dd>
+                <dt>Households</dt>
+                <dd>{formatInt(place.households)} ({formatDec(place.households / place.area)} per km²)</dd>
+              </dl>
+            )}
         </Col>
 
         <Col lg={6}>
@@ -91,47 +95,49 @@ const PlaceInfo = ({ place, map }) => {
         </Col>
       </Row>
 
-      <Row className='mt-3'>
-        {place.population > 0 && (
-          <Col lg={6}>
-            {['Gender', 'Population group', 'First language'].map(name => {
-              const data = place.demographics.find(d => d.name === name)
-              return data && <DemogTable key={data.name} header={data.name} values={data.values} />
-            })}
-          </Col>
-        )}
+      {!loading && (
+        <Row className='mt-3'>
+          {place.population > 0 && (
+            <Col lg={6}>
+              {['Gender', 'Population group', 'First language'].map(name => {
+                const data = place.demographics.find(d => d.name === name)
+                return data && <DemogTable key={data.name} header={data.name} values={data.values} />
+              })}
+            </Col>
+          )}
 
-        {place.children.length > 0 && (
-          <Col lg={6}>
-            <h4>{childNames[place.type.name]}</h4>
+          {place.children.length > 0 && (
+            <Col lg={6}>
+              <h4>{childNames[place.type.name]}</h4>
 
-            <Table>
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th className='text-right'>Population</th>
-                  <th className='text-right'>Area (km²)</th>
-                </tr>
-              </thead>
-              <tbody>
-                {place.children.sort((a, b) => compareString(a.name.toUpperCase(), b.name.toUpperCase())).map(c => (
-                  <tr key={c.code}>
-                    <td><Link to={`/place/${c.code}`}>{c.name}</Link></td>
-                    <td className='text-right'>{formatInt(c.population)}</td>
-                    <td className='text-right'>{formatDec(c.area)}</td>
+              <Table>
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th className='text-right'>Population</th>
+                    <th className='text-right'>Area (km²)</th>
                   </tr>
-                ))}
-              </tbody>
-            </Table>
-          </Col>
-        )}
-      </Row>
+                </thead>
+                <tbody>
+                  {place.children.sort((a, b) => compareString(a.name.toUpperCase(), b.name.toUpperCase())).map(c => (
+                    <tr key={c.code}>
+                      <td><Link to={`/place/${c.code}`}>{c.name}</Link></td>
+                      <td className='text-right'>{formatInt(c.population)}</td>
+                      <td className='text-right'>{formatDec(c.area)}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </Table>
+            </Col>
+          )}
+        </Row>
+      )}
     </>
   )
 }
 
 const PlaceView = ({ place, loading, geom, childGeoms, geomLoading }) => {
-  if (loading || !place) {
+  if (!place.code) {
     return (
       <>
         <Helmet><title>Census 2011</title></Helmet>
@@ -145,7 +151,7 @@ const PlaceView = ({ place, loading, geom, childGeoms, geomLoading }) => {
     return (
       <>
         <Helmet><title>{`Census 2011: ${place.type.descrip}: ${place.name}`}</title></Helmet>
-        <PlaceInfo place={place} map={map} />
+        <PlaceInfo place={place} loading={loading} map={map} />
         <Footer />
       </>
     )

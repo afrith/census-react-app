@@ -7,14 +7,24 @@ query {
   }
 }`
 
+export const PLACE_BASIC_BY_CODE = gql`
+query ($code: String!) {
+  placeByCode(code: $code) {
+    code
+    name
+    type { name descrip }
+  }
+}
+`
+
 export const PLACE_BY_CODE = gql`
 query ($code: String!) {
   placeByCode(code: $code) {
     code
     name
     type { name descrip }
-    fullParents { code name }
-    children { code name population area }
+    fullParents { code name type { name descrip } }
+    children { code name type { name descrip } population area }
     population
     households
     area
