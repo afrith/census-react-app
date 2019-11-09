@@ -3,7 +3,7 @@ import gql from 'graphql-tag'
 export const ALL_PROVINCES = gql`
 query {
   allProvinces {
-    code name population area
+    code name population area type { name descrip }
   }
 }`
 
