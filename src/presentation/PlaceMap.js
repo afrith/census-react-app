@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 // This is a conditional import because leaflet can't be imported on server-side,
 // but this component will only ever render on client-side.
-const { Map, TileLayer, GeoJSON, Popup, withLeaflet } = process.env.BUILD_TARGET === 'client' ? require('react-leaflet') : {}
+const { Map, TileLayer, Popup, withLeaflet } = process.env.BUILD_TARGET === 'client' ? require('react-leaflet') : {}
 const VectorGrid = process.env.BUILD_TARGET === 'client' ? withLeaflet(require('react-leaflet-vectorgrid')) : null
 
 const childTypes = {
@@ -28,7 +28,7 @@ const PlaceMap = ({ place }) => {
   useEffect(() => { setPopup(null) }, [code]) // hide popup on place change
 
   if (process.env.BUILD_TARGET !== 'client') return <div />
-  const bounds = [[bbox[1], bbox[0]], [bbox[3], bbox[2]]]   // swap X-Y
+  const bounds = [[bbox[1], bbox[0]], [bbox[3], bbox[2]]] // swap X-Y
 
   const typeName = place.type.name
   const layers = [typeName, ...childTypes[typeName]]
@@ -39,7 +39,7 @@ const PlaceMap = ({ place }) => {
     color: '#3388ff',
     fill: false
   } : hiddenStyle
-  
+
   const childrenCodes = children.map(c => c.code)
 
   const childLayerStyle = properties => childrenCodes.includes(properties.code) ? {
@@ -53,11 +53,11 @@ const PlaceMap = ({ place }) => {
   const styles = {}
   styles[typeName] = objLayerStyle
   childTypes[typeName].forEach(type => { styles[type] = childLayerStyle })
-  
+
   const gridOptions = {
     type: 'protobuf',
     url: `${process.env.RAZZLE_API_URL}/tiles/{z}/{x}/{y}.mvt?layers=${layers.join(',')}`,
-    subdomains: 'a',  // dummy
+    subdomains: 'a', // dummy
     vectorTileLayerStyles: styles,
     zIndex: 801,
     interactive: true,

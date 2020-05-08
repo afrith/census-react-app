@@ -4,8 +4,3 @@ export const makeFeatureFromPlace = place => ({
   properties: { code: place.code, name: place.name },
   geometry: place.geom
 })
-
-export const makeFeatureCollectionFromPlaceArray = placeArray => ({
-  type: 'FeatureCollection',
-  features: placeArray.map(makeFeatureFromPlace)
-})

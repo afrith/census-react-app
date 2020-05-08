@@ -56,7 +56,7 @@ const PlaceInfo = ({ place, map, loading }) => {
   useEffect(() => {
     window.scrollTo(0, 0)
   }, [place.code])
-  
+
   return (
     <>
       <Breadcrumb>

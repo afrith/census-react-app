@@ -2,7 +2,6 @@ import React from 'react'
 import { useParams } from 'react-router-dom'
 import { useQuery } from 'react-apollo'
 import { PLACE_BASIC_BY_CODE, PLACE_BY_CODE } from '../lib/queries'
-import { makeFeatureCollectionFromPlaceArray } from '../lib/geom'
 import PlaceView from '../presentation/PlaceView'
 
 const PlaceContainer = () => {
