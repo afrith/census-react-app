@@ -6,7 +6,7 @@ import { LoadingSpinner } from './spinners'
 import PlaceMap from './PlaceMap'
 import Footer from './Footer'
 
-const BigmapView = ({ loading, place, geom, childGeoms }) => {
+const BigmapView = ({ loading, place }) => {
   if (loading || !place) {
     return (
       <>
@@ -25,7 +25,7 @@ const BigmapView = ({ loading, place, geom, childGeoms }) => {
           <Breadcrumb.Item active>Map</Breadcrumb.Item>
         </Breadcrumb>
         <h3>Map of {place.name} {place.type.descrip}</h3>
-        <PlaceMap key={place.code} geom={geom} childGeoms={childGeoms} />
+        <PlaceMap place={place} />
         <Footer />
       </>
     )

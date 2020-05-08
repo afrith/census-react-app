@@ -12,7 +12,7 @@ query ($code: String!) {
   placeByCode(code: $code) {
     code
     name
-    type { id descrip }
+    type { id name descrip }
   }
 }
 `
@@ -22,7 +22,7 @@ query ($code: String!) {
   placeByCode(code: $code) {
     code
     name
-    type { id descrip }
+    type { id name descrip }
     fullParents { code name type { id descrip } }
     children { code name type { id descrip } population area }
     population
@@ -32,19 +32,7 @@ query ($code: String!) {
       name
       values { label value }
     }
-  }
-}
-`
-
-export const GEOM_BY_CODE = gql`
-query ($code: String!) {
-  placeByCode(code: $code) {
-    code
-    name
-    type { id descrip }
-    fullParents { code name }
-    geom
-    children { code name geom }
+    bbox
   }
 }
 `

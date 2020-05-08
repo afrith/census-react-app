@@ -1,7 +1,7 @@
 import React from 'react'
 import { useParams } from 'react-router-dom'
 import { useQuery } from 'react-apollo'
-import { PLACE_BASIC_BY_CODE, PLACE_BY_CODE, GEOM_BY_CODE } from '../lib/queries'
+import { PLACE_BASIC_BY_CODE, PLACE_BY_CODE } from '../lib/queries'
 import { makeFeatureCollectionFromPlaceArray } from '../lib/geom'
 import PlaceView from '../presentation/PlaceView'
 
@@ -11,13 +11,9 @@ const PlaceContainer = () => {
   // This fetches only name, code, type, and only if the data is already in the cache.
   const { data: basicData } = useQuery(PLACE_BASIC_BY_CODE, { variables: { code }, fetchPolicy: 'cache-only' })
   // This fetches the full place data, excluding the geometries.
-  const { loading: fullLoading, error: fullError, data: fullData } = useQuery(PLACE_BY_CODE, { variables: { code } })
-  // This fetches the geometries, only on client-side because we can't render a map on server-side.
-  // Also, even on client-side we don't want to wait for the map before rendering the rest of the page.
-  const { loading: geomLoading, error: geomError, data: geomData } = useQuery(GEOM_BY_CODE, { variables: { code }, ssr: false })
+  const { loading: fullLoading, error, data: fullData } = useQuery(PLACE_BY_CODE, { variables: { code } })
 
   // We ignore the error from the cache fetch because it throws on a cache miss.
-  const error = fullError || geomError
   if (error) throw error
 
   // Merge the (potential) cached basicData, and the queried full data.
@@ -31,9 +27,6 @@ const PlaceContainer = () => {
     <PlaceView
       loading={fullLoading}
       place={place}
-      geomLoading={geomLoading}
-      geom={geomData && geomData.placeByCode.geom}
-      childGeoms={geomData && makeFeatureCollectionFromPlaceArray(geomData.placeByCode.children)}
     />
   )
 }

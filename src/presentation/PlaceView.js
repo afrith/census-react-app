@@ -88,7 +88,7 @@ const PlaceInfo = ({ place, map, loading }) => {
 
         <Col lg={6}>
           <div className='small-map' id='place-map' style={{ height: '300px' }}>
-            {map}
+            {!loading && <PlaceMap place={place} />}
           </div>
           <div>
             <small>
@@ -149,13 +149,10 @@ const PlaceView = ({ place, loading, geom, childGeoms, geomLoading }) => {
       </>
     )
   } else {
-    const map = geomLoading
-      ? <LoadingSpinner message='Map loading...' />
-      : <PlaceMap key={place.code} geom={geom} childGeoms={childGeoms} />
     return (
       <>
         <Helmet><title>{`Census 2011: ${place.type.descrip}: ${place.name}`}</title></Helmet>
-        <PlaceInfo place={place} loading={loading} map={map} />
+        <PlaceInfo place={place} loading={loading} />
         <Footer />
       </>
     )
