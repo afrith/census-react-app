@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "@koa/router": "^8.0.8",
+    "@rehooks/component-size": "^1.0.3",
     "apollo-boost": "^0.4.7",
     "apollo-cache-inmemory": "^1.6.5",
     "bootstrap": "^4.4.1",
@@ -26,7 +27,6 @@
     "koa-helmet": "^5.2.0",
     "koa-proxies": "^0.11.0",
     "koa-static": "^5.0.0",
-    "leaflet": "^1.6.0",
     "lodash": "^4.17.15",
     "query-string": "^6.12.1",
     "razzle": "^3.1.0",
@@ -35,8 +35,7 @@
     "react-bootstrap": "^1.0.1",
     "react-dom": "^16.13.1",
     "react-helmet-async": "^1.0.6",
-    "react-leaflet": "^2.7.0",
-    "react-leaflet-vectorgrid": "^2.2.1",
+    "react-map-gl": "^5.2.5",
     "react-router-bootstrap": "^0.25.0",
     "react-router-dom": "^5.1.2",
     "tokml": "^0.4.0"

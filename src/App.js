@@ -2,7 +2,7 @@ import React from 'react'
 import { Route, Switch, Redirect } from 'react-router-dom'
 import { parse } from 'query-string'
 import 'bootstrap/dist/css/bootstrap.min.css'
-import 'leaflet/dist/leaflet.css'
+import 'mapbox-gl/dist/mapbox-gl.css'
 import './App.css'
 
 import HomeContainer from './containers/HomeContainer'
