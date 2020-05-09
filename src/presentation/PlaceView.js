@@ -86,17 +86,19 @@ const PlaceInfo = ({ place, map, loading }) => {
             )}
         </Col>
 
-        <Col lg={6}>
-          <div className='small-map' id='place-map' style={{ height: '300px' }}>
-            {!loading && <PlaceMap place={place} />}
-          </div>
-          <div>
-            <small>
-              <Link to={`/place/${place.code}/map`}>View larger map</Link> •{' '}
-              <a href={`/place/${place.code}/kml`}>Download KML file</a>
-            </small>
-          </div>
-        </Col>
+        {!loading && (
+          <Col lg={6}>
+            <div className='small-map' id='place-map' style={{ height: '300px' }}>
+              <PlaceMap place={place} />
+            </div>
+            <div>
+              <small>
+                <Link to={`/place/${place.code}/map`}>View larger map</Link> •{' '}
+                <a href={`/place/${place.code}/kml`}>Download KML file</a>
+              </small>
+            </div>
+          </Col>
+        )}
       </Row>
 
       {!loading && (
