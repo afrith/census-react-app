@@ -24,7 +24,9 @@ const SearchForm = ({ defaultSearchText = '' }) => {
           onChange={event => setSearchText(event.target.value)}
         />
       </Form.Group>
-      <Button type='submit' variant='primary'>Search</Button>
+      <Form.Group className='mr-sm-2'>
+        <Button type='submit' variant='primary'>Search</Button>
+      </Form.Group>
     </Form>
   )
 }
