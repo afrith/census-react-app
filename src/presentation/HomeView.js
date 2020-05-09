@@ -55,18 +55,18 @@ const HomeView = ({ loading, provinces }) => {
         <Col lg={6}>
           <h2>Place types</h2>
 
-          <p>The census results are available for geographic areas at five levels of a hierarchy:</p>
+          <p>The census results are available for five types of area, which are listed here from largest to smallest.</p>
           <dl>
             <dt>Provinces</dt>
             <dd>The nine provinces of South Africa.</dd>
             <dt>Metropolitan and District Municipalities</dt>
-            <dd>South Africa is divided into eight metropolitan municipalities and fourty-four district municipalities.</dd>
+            <dd>Administrative divisions of the provinces; there are 8 metropolitan and 44 district municipalities.</dd>
             <dt>Local Municipalities</dt>
-            <dd>The district municipalities are divided into local municipalities. There are 226 local municipalities in South Africa.</dd>
+            <dd>Administrative divisions of the district municipalities; there are 226 local municipalities.</dd>
             <dt>Main Places</dt>
-            <dd>These are named locations determined by Statistics South Africa, which generally correspond to towns, small cities, regions of large cities, or tribal areas. Areas that do not fall within any named settlement are incorporated in a main place named for the municipality.</dd>
+            <dd>Named locations determined by Statistics South Africa, which generally correspond to towns, small cities, regions of large cities, or traditional council areas. Areas that do not fall within any named settlement are incorporated in a main place named for the municipality.</dd>
             <dt>Sub Places</dt>
-            <dd>These are named locations determined by Statistics South Africa, which generally correspond to suburbs, villages, or localities. When a main place contains only one sub place, that sub place is named for the main place with a suffix of “SP”.</dd>
+            <dd>Named locations determined by Statistics South Africa, which generally correspond to suburbs, villages, or localities. When a main place contains only one sub place, that sub place is named for the main place with a suffix of “SP”.</dd>
           </dl>
         </Col>
       </Row>
