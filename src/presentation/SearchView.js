@@ -11,7 +11,7 @@ import Footer from './Footer'
 
 const ResultTable = ({ places }) => {
   return (
-    <Table className='mt-4'>
+    <Table className='my-0'>
       <thead>
         <tr>
           <th>Name</th>
@@ -48,7 +48,9 @@ const SearchView = ({ name, loading, places }) => {
 
       <h2>Census 2011 Search Results for “{name}”</h2>
 
-      {(!loading && places) ? <ResultTable places={places} /> : <LoadingSpinner />}
+      <div className='my-3'>
+        {(!loading && places) ? <ResultTable places={places} /> : <LoadingSpinner />}
+      </div>
 
       <h2>Search again</h2>
 
