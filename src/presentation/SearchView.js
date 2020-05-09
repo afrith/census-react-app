@@ -9,6 +9,10 @@ import { formatInt, formatDec } from '../lib/formats'
 import SearchForm from './SearchForm'
 
 const ResultTable = ({ places }) => {
+  if (places.length === 0) {
+    return <div>No results found.</div>
+  }
+
   return (
     <Table className='my-0'>
       <thead>
