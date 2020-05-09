@@ -25,7 +25,7 @@ router.get('/place/:code/kml', async ctx => {
       geom
     }
   }`
-  const data = await graphqlRequest(process.env.RAZZLE_API_URL + '/graphql', query, { code: ctx.params.code })
+  const data = await graphqlRequest(process.env.RAZZLE_GRAPHQL_URL, query, { code: ctx.params.code })
 
   const feature = makeFeatureFromPlace(data.placeByCode)
   feature.properties.description = `${data.placeByCode.type.descrip} ${data.placeByCode.code}`

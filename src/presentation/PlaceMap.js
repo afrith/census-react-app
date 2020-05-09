@@ -56,7 +56,7 @@ const PlaceMap = ({ place }) => {
 
   const gridOptions = {
     type: 'protobuf',
-    url: `${process.env.RAZZLE_API_URL}/tiles/{z}/{x}/{y}.mvt?layers=${layers.join(',')}`,
+    url: `${process.env.RAZZLE_TILE_ROOT}/{z}/{x}/{y}.mvt?layers=${layers.join(',')}`,
     subdomains: 'a', // dummy
     vectorTileLayerStyles: styles,
     zIndex: 801,
