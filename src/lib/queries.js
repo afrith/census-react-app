@@ -1,9 +1,11 @@
 import gql from 'graphql-tag'
 
+const type = 'type { id name descrip }'
+
 export const ALL_PROVINCES = gql`
 query {
   allProvinces {
-    code name population area type { id descrip }
+    code name population area ${type}
   }
 }`
 
@@ -12,7 +14,7 @@ query ($code: String!) {
   placeByCode(code: $code) {
     code
     name
-    type { id name descrip }
+    ${type}
   }
 }
 `
@@ -22,9 +24,9 @@ query ($code: String!) {
   placeByCode(code: $code) {
     code
     name
-    type { id name descrip }
-    fullParents { code name type { id descrip } }
-    children { code name type { id descrip } population area }
+    ${type}
+    fullParents { code name ${type} }
+    children { code name ${type} population area }
     population
     households
     area
@@ -42,7 +44,7 @@ query ($name: String!) {
   placesByName(name: $name) {
     code
     name
-    type { id descrip }
+    ${type}
     province { code name }
     population
     area
