@@ -91,7 +91,7 @@ router.get('/*',
 const server = new Koa()
 server
   .use(koaHelmet())
-  .use(koaStatic(process.env.RAZZLE_PUBLIC_DIR))
+  .use(koaStatic(process.env.RAZZLE_PUBLIC_DIR, { maxage: process.env.NODE_ENV === 'production' ? 604800000 : 0 }))
   .use(router.routes())
   .use(router.allowedMethods())
 
