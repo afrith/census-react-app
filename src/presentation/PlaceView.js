@@ -73,7 +73,7 @@ const PlaceInfo = ({ place, map, loading }) => {
           </h2>
 
           {loading
-            ? <LoadingSpinner message='Data loading...' />
+            ? <LoadingSpinner />
             : (
               <dl>
                 <dt>Area</dt>
