@@ -7,7 +7,6 @@ import Table from 'react-bootstrap/Table'
 import { LoadingSpinner } from './spinners'
 import { formatInt, formatDec } from '../lib/formats'
 import SearchForm from './SearchForm'
-import Footer from './Footer'
 
 const ResultTable = ({ places }) => {
   return (
@@ -55,8 +54,6 @@ const SearchView = ({ name, loading, places }) => {
       <h2>Search again</h2>
 
       <SearchForm defaultSearchText={name} />
-
-      <Footer />
     </>
   )
 }

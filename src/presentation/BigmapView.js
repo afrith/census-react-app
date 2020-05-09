@@ -4,7 +4,6 @@ import { LinkContainer } from 'react-router-bootstrap'
 import Breadcrumb from 'react-bootstrap/Breadcrumb'
 import { LoadingSpinner } from './spinners'
 import PlaceMap from './PlaceMap'
-import Footer from './Footer'
 
 const BigmapView = ({ loading, place }) => {
   if (loading || !place) {
@@ -26,7 +25,6 @@ const BigmapView = ({ loading, place }) => {
         </Breadcrumb>
         <h3>Map of {place.name} {place.type.descrip}</h3>
         <PlaceMap place={place} />
-        <Footer />
       </>
     )
   }
