@@ -43,12 +43,12 @@ const DemogTable = ({ header, values }) => {
 }
 
 const childNames = {
-  Province: 'Districts',
-  'District Municipality': 'Local Municipalities',
-  'Metropolitan Municipality': 'Main Places',
-  'Local Municipality': 'Main Places',
-  'District Management Area': 'Main Places',
-  'Main Place': 'Sub Places'
+  province: 'Districts',
+  district: 'Local Municipalities',
+  metro: 'Main Places',
+  local: 'Main Places',
+  dma: 'Main Places',
+  mainplace: 'Sub Places'
 }
 
 const PlaceInfo = ({ place, map, loading }) => {
@@ -113,7 +113,7 @@ const PlaceInfo = ({ place, map, loading }) => {
 
           {place.children.length > 0 && (
             <Col lg={6}>
-              <h4>{childNames[place.type.descrip]}</h4>
+              <h4>{childNames[place.type.name]}</h4>
 
               <Table>
                 <thead>
