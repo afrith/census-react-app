@@ -24,7 +24,7 @@ export const createClient = () => {
     connectToDevTools: process.browser,
     ssrMode: !process.browser,
     link: new HttpLink({
-      uri: process.env.RAZZLE_GRAPHQL_URL,
+      uri: process.browser ? '/graphql' : process.env.RAZZLE_GRAPHQL_URL,
       fetch
     }),
     cache: process.browser

@@ -3,6 +3,7 @@ import React from 'react'
 import { StaticRouter } from 'react-router-dom'
 import Koa from 'koa'
 import koaStatic from 'koa-static'
+import koaProxy from 'koa-proxies'
 import koaHelmet from 'koa-helmet'
 import Router from '@koa/router'
 import { ApolloProvider, renderToStringWithData } from 'react-apollo'
@@ -91,6 +92,11 @@ router.get('/*',
 const server = new Koa()
 server
   .use(koaHelmet())
+  .use(koaProxy('/graphql', {
+    target: process.env.RAZZLE_GRAPHQL_URL,
+    changeOrigin: true,
+    rewrite: path => path.replace(/\/graphql/, '')
+  }))
   .use(koaStatic(process.env.RAZZLE_PUBLIC_DIR, { maxage: process.env.NODE_ENV === 'production' ? 604800000 : 0 }))
   .use(router.routes())
   .use(router.allowedMethods())
