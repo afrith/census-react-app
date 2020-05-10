@@ -48,7 +48,8 @@ const childNames = {
   metro: 'Main Places',
   local: 'Main Places',
   dma: 'Main Places',
-  mainplace: 'Sub Places'
+  mainplace: 'Sub Places',
+  subplace: 'Small Areas'
 }
 
 const PlaceInfo = ({ place, map, loading }) => {

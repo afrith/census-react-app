@@ -10,14 +10,16 @@ const childTypes = {
   local: ['mainplace'],
   dma: ['mainplace'],
   mainplace: ['subplace'],
-  subplace: []
+  subplace: ['sa'],
+  sa: []
 }
 
 const sources = [
   { id: 'province', type: 'vector', tiles: [`${process.env.RAZZLE_TILE_ROOT}/{z}/{x}/{y}.mvt?layers=province`], maxzoom: 20 },
   { id: 'munis', type: 'vector', tiles: [`${process.env.RAZZLE_TILE_ROOT}/{z}/{x}/{y}.mvt?layers=metro,district,local,dma`], maxzoom: 20 },
   { id: 'mainplace', type: 'vector', tiles: [`${process.env.RAZZLE_TILE_ROOT}/{z}/{x}/{y}.mvt?layers=mainplace`], maxzoom: 20 },
-  { id: 'subplace', type: 'vector', tiles: [`${process.env.RAZZLE_TILE_ROOT}/{z}/{x}/{y}.mvt?layers=subplace`], maxzoom: 20 }
+  { id: 'subplace', type: 'vector', tiles: [`${process.env.RAZZLE_TILE_ROOT}/{z}/{x}/{y}.mvt?layers=subplace`], maxzoom: 20 },
+  { id: 'sa', type: 'vector', tiles: [`${process.env.RAZZLE_TILE_ROOT}/{z}/{x}/{y}.mvt?layers=sa`], maxzoom: 20 }
 ]
 
 const typeSource = {
