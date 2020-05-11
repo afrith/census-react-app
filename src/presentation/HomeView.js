@@ -37,7 +37,7 @@ const HomeView = ({ loading, provinces }) => {
 
       <h1>Census 2011</h1>
 
-      <p>This site provides online access to a selection of results from South Africa's <a href='http://www.statssa.gov.za/?page_id=3839'>Census 2011</a> down to the “sub place” layer of detail, as released in the Community Profile Database DVD set. Please note the <a href='#footer'>disclaimer</a> at the foot of this page.</p>
+      <p>This site provides online access to a selection of results from South Africa's <a href='http://www.statssa.gov.za/?page_id=3839'>Census 2011</a> down to the “small area” layer of detail, as released in the Community Profile Database DVD set. Please note the <a href='#footer'>disclaimer</a> at the foot of this page.</p>
 
       <Row>
         <Col lg={6}>
