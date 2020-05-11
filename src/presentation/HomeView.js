@@ -55,7 +55,7 @@ const HomeView = ({ loading, provinces }) => {
         <Col lg={6}>
           <h2>Place types</h2>
 
-          <p>The census results are available for five types of area, which are listed here from largest to smallest.</p>
+          <p>The census results are available for six types of area, which are listed here from largest to smallest.</p>
           <dl>
             <dt>Provinces</dt>
             <dd>The nine provinces of South Africa.</dd>
@@ -64,9 +64,11 @@ const HomeView = ({ loading, provinces }) => {
             <dt>Local Municipalities</dt>
             <dd>Administrative divisions of the district municipalities; there are 226 local municipalities.</dd>
             <dt>Main Places</dt>
-            <dd>Named locations determined by Statistics South Africa, which generally correspond to towns, small cities, regions of large cities, or traditional council areas. Areas that do not fall within any named settlement are incorporated in a main place named for the municipality.</dd>
+            <dd>Named locations determined by Stats SA, which generally correspond to towns, small cities, regions of large cities, or traditional council areas. Areas that do not fall within any named settlement are incorporated in a main place named for the municipality.</dd>
             <dt>Sub Places</dt>
-            <dd>Named locations determined by Statistics South Africa, which generally correspond to suburbs, villages, or localities. When a main place contains only one sub place, that sub place is named for the main place with a suffix of “SP”.</dd>
+            <dd>Named locations determined by Stats SA, which generally correspond to suburbs, villages, or localities. When a main place contains only one sub place, that sub place is named for the main place with a suffix of “SP”.</dd>
+            <dt>Small Areas</dt>
+            <dd>The smallest output unit for census data; on average each small area contains approximately 600 people.</dd>
           </dl>
         </Col>
       </Row>
