@@ -7,6 +7,8 @@ const dataIdFromObject = object => {
   switch (object.__typename) {
     case 'Place':
       return `Place:${object.code}`
+    case 'PlaceType':
+      return `PlaceType:${object.name}`
     default:
       return defaultDataIdFromObject(object)
   }
@@ -14,7 +16,7 @@ const dataIdFromObject = object => {
 
 const cacheRedirects = {
   Query: {
-    placeByCode: (_, args, { getCacheKey }) =>
+    place: (_, args, { getCacheKey }) =>
       getCacheKey({ __typename: 'Place', code: args.code })
   }
 }

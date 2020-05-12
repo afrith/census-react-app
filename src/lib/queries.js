@@ -1,17 +1,17 @@
 import gql from 'graphql-tag'
 
-const type = 'type { id name descrip }'
+const type = 'type { name descrip }'
 
 export const ALL_PROVINCES = gql`
 query {
-  allProvinces {
+  allProvinces: places(type: "province") {
     code name population area ${type}
   }
 }`
 
 export const PLACE_BASIC_BY_CODE = gql`
 query ($code: String!) {
-  placeByCode(code: $code) {
+  placeByCode: place(code: $code) {
     code
     name
     ${type}
@@ -21,7 +21,7 @@ query ($code: String!) {
 
 export const PLACE_BY_CODE = gql`
 query ($code: String!) {
-  placeByCode(code: $code) {
+  placeByCode: place(code: $code) {
     code
     name
     ${type}
@@ -41,7 +41,7 @@ query ($code: String!) {
 
 export const PLACES_BY_NAME = gql`
 query ($name: String!) {
-  placesByName(name: $name) {
+  placesByName: places(name: $name) {
     code
     name
     ${type}
