@@ -106,8 +106,8 @@ const PlaceInfo = ({ place, map, loading }) => {
           {place.population > 0 && (
             <Col lg={6}>
               {['Gender', 'Population group', 'First language'].map(name => {
-                const data = place.demographics.find(d => d.name === name)
-                return data && <DemogTable key={data.name} header={data.name} values={data.values} />
+                const data = place.variables.find(d => d.variable.name === name)
+                return data && <DemogTable key={data.variable.name} header={data.variable.name} values={data.values} />
               })}
             </Col>
           )}

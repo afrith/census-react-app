@@ -30,8 +30,8 @@ query ($code: String!) {
     population
     households
     area
-    demographics {
-      name
+    variables {
+      variable { id name }
       values { label value }
     }
     bbox
