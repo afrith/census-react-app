@@ -11,3 +11,7 @@ export const ErrorMessage = ({ message }) => (
     If errors continue to occur please email me at <a href='mailto:adrian@adrianfrith.com'>adrian@adrianfrith.com</a> for assistance.
   </Alert>
 )
+
+export const WarningMessage = ({ message }) => (
+  <Alert variant='warning'>{message}</Alert>
+)

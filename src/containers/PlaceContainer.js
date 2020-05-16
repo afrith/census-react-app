@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom'
 import { useQuery } from 'react-apollo'
 import { PLACE_BASIC_BY_CODE, PLACE_BY_CODE } from '../lib/queries'
 import PlaceView from '../presentation/PlaceView'
+import { WarningMessage } from '../presentation/alerts'
 
 const PlaceContainer = () => {
   const { code } = useParams()
@@ -14,6 +15,11 @@ const PlaceContainer = () => {
 
   // We ignore the error from the cache fetch because it throws on a cache miss.
   if (error) throw error
+
+  // This occurs if the place code is wrong
+  if (fullData && !fullData.placeByCode) {
+    return <WarningMessage message={`Error: no place found with the code ${code}.`} />
+  }
 
   // Merge the (potential) cached basicData, and the queried full data.
   // The code check is because Apollo returns old data for the previous place while the new place data is fetching.
