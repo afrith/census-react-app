@@ -3,54 +3,13 @@ import { Helmet } from 'react-helmet-async'
 import { Link } from 'react-router-dom'
 import { LinkContainer } from 'react-router-bootstrap'
 import Breadcrumb from 'react-bootstrap/Breadcrumb'
-import Table from 'react-bootstrap/Table'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import { LoadingSpinner } from './spinners'
 import PlaceMap from './PlaceMap'
-import { formatInt, formatDec, formatPerc } from '../lib/formats'
-import { compareString } from '../lib/utils'
-
-const DemogTable = ({ header, values }) => {
-  const applicableValues = values.filter(v => v.label !== 'Not applicable').sort((a, b) => b.value - a.value || compareString(a.label, b.label))
-  const naValues = values.filter(v => v.label === 'Not applicable')
-  const total = applicableValues.reduce((acc, cur) => acc + cur.value, 0)
-  const displayValues = [...applicableValues, ...naValues].filter(v => v.value > 0)
-
-  return (
-    <>
-      <h4>{header}</h4>
-      <Table>
-        <thead>
-          <tr>
-            <th />
-            <th className='text-right'>People</th>
-            <th className='text-right'>Percentage</th>
-          </tr>
-        </thead>
-        <tbody>
-          {displayValues.map(v => (
-            <tr key={v.label}>
-              <td>{v.label}</td>
-              <td className='text-right'>{formatInt(v.value)}</td>
-              <td className='text-right'>{v.label === 'Not applicable' ? '' : formatPerc(v.value / total)}</td>
-            </tr>
-          ))}
-        </tbody>
-      </Table>
-    </>
-  )
-}
-
-const childNames = {
-  province: 'Districts',
-  district: 'Local Municipalities',
-  metro: 'Main Places',
-  local: 'Main Places',
-  dma: 'Main Places',
-  mainplace: 'Sub Places',
-  subplace: 'Small Areas'
-}
+import DemogTable from './DemogTable'
+import ChildrenTable from './ChildrenTable'
+import { formatInt, formatDec } from '../lib/formats'
 
 const PlaceInfo = ({ place, map, loading }) => {
   useEffect(() => {
@@ -114,26 +73,7 @@ const PlaceInfo = ({ place, map, loading }) => {
 
           {place.children.length > 0 && (
             <Col lg={6}>
-              <h4>{childNames[place.type.name]}</h4>
-
-              <Table>
-                <thead>
-                  <tr>
-                    <th>Name</th>
-                    <th className='text-right'>Population</th>
-                    <th className='text-right'>Area (km²)</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {place.children.sort((a, b) => compareString(a.name.toUpperCase(), b.name.toUpperCase())).map(c => (
-                    <tr key={c.code}>
-                      <td><Link to={`/place/${c.code}`}>{c.name}</Link></td>
-                      <td className='text-right'>{formatInt(c.population)}</td>
-                      <td className='text-right'>{formatDec(c.area)}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </Table>
+              <ChildrenTable place={place} />
             </Col>
           )}
         </Row>
