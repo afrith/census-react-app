@@ -5,6 +5,7 @@ import { LinkContainer } from 'react-router-bootstrap'
 import Breadcrumb from 'react-bootstrap/Breadcrumb'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
+import { keyBy } from 'lodash'
 import { LoadingSpinner } from './spinners'
 import PlaceMap from './PlaceMap'
 import { PieBlock, AgeBlock } from './DemogBlocks'
@@ -15,6 +16,11 @@ const PlaceInfo = ({ place, map, loading }) => {
   useEffect(() => {
     window.scrollTo(0, 0)
   }, [place.code])
+
+  let keyedVariables
+  if (place.variables) {
+    keyedVariables = keyBy(place.variables, d => d.variable.name)
+  }
 
   return (
     <>
@@ -64,11 +70,10 @@ const PlaceInfo = ({ place, map, loading }) => {
         <Row className='mt-3'>
           {place.population > 0 && (
             <Col lg={6}>
-              {['Gender', 'Population group', 'First language'].map(name => {
-                const data = place.variables.find(d => d.variable.name === name)
-                return data && <PieBlock key={data.variable.name} header={data.variable.name} values={data.values} />
-              })}
-              <AgeBlock header='Age' values={place.variables.find(d => d.variable.name === 'Age').values} />
+              <PieBlock header='Gender' values={keyedVariables.Gender.values} />
+              <AgeBlock header='Age' values={keyedVariables.Age.values} />
+              <PieBlock header='Population group' values={keyedVariables['Population group'].values} />
+              <PieBlock header='First language' values={keyedVariables['First language'].values} />
             </Col>
           )}
 
