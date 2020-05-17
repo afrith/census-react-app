@@ -18,7 +18,7 @@ export const PieBlock = ({ header, values }) => {
       <div className='d-flex flex-column align-items-center'>
         <PieChart data={applicableValues} />
         {(naValues.length > 0 && naValues[0].value > 0) && (
-          <div className='font-italic mb-3'>{formatInt(naValues[0].value)} "Not applicable" records not included.</div>
+          <div className='font-italic mb-3'>{formatInt(naValues[0].value)} "Not applicable" records excluded.</div>
         )}
       </div>
       <TableCollapse keyForId={header}>
