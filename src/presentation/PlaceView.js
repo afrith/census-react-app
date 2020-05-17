@@ -7,7 +7,7 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import { LoadingSpinner } from './spinners'
 import PlaceMap from './PlaceMap'
-import DemogTable, { AgeTable } from './DemogTable'
+import { PieBlock, AgeBlock } from './DemogBlocks'
 import ChildrenTable from './ChildrenTable'
 import { formatInt, formatDec } from '../lib/formats'
 
@@ -66,9 +66,9 @@ const PlaceInfo = ({ place, map, loading }) => {
             <Col lg={6}>
               {['Gender', 'Population group', 'First language'].map(name => {
                 const data = place.variables.find(d => d.variable.name === name)
-                return data && <DemogTable key={data.variable.name} header={data.variable.name} values={data.values} />
+                return data && <PieBlock key={data.variable.name} header={data.variable.name} values={data.values} />
               })}
-              <AgeTable header='Age' values={place.variables.find(d => d.variable.name === 'Age').values} />
+              <AgeBlock header='Age' values={place.variables.find(d => d.variable.name === 'Age').values} />
             </Col>
           )}
 

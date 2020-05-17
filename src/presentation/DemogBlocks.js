@@ -1,34 +1,12 @@
 import React from 'react'
-import Table from 'react-bootstrap/Table'
-
 import PieChart from './PieChart'
 import { AgeChart } from './BarCharts'
 import TableCollapse from './TableCollapse'
-import { formatInt, formatPerc } from '../lib/formats'
+import BasicTable from './BasicTable'
+import { formatInt } from '../lib/formats'
 import { compareString } from '../lib/utils'
 
-const BasicTable = ({ values, total }) => (
-  <Table>
-    <thead>
-      <tr>
-        <th />
-        <th className='text-right'>People</th>
-        <th className='text-right'>Percentage</th>
-      </tr>
-    </thead>
-    <tbody>
-      {values.map(v => (
-        <tr key={v.label}>
-          <td>{v.label}</td>
-          <td className='text-right'>{formatInt(v.value)}</td>
-          <td className='text-right'>{v.label === 'Not applicable' ? '' : formatPerc(v.value / total)}</td>
-        </tr>
-      ))}
-    </tbody>
-  </Table>
-)
-
-const DemogTable = ({ header, values }) => {
+export const PieBlock = ({ header, values }) => {
   const applicableValues = values.filter(v => v.label !== 'Not applicable').sort((a, b) => b.value - a.value || compareString(a.label, b.label))
   const naValues = values.filter(v => v.label === 'Not applicable')
   const total = applicableValues.reduce((acc, cur) => acc + cur.value, 0)
@@ -40,7 +18,7 @@ const DemogTable = ({ header, values }) => {
       <div className='d-flex flex-column align-items-center'>
         <PieChart data={applicableValues} />
         {(naValues.length > 0 && naValues[0].value > 0) && (
-          <div className='font-italic mb-3'>{formatInt(naValues[0].value)}  "Not applicable" records not included.</div>
+          <div className='font-italic mb-3'>{formatInt(naValues[0].value)} "Not applicable" records not included.</div>
         )}
       </div>
       <TableCollapse keyForId={header}>
@@ -53,7 +31,7 @@ const DemogTable = ({ header, values }) => {
 const AGE_MAX = 85
 const ageIndex = age => Math.min(AGE_MAX / 5, Math.floor(age / 5))
 
-export const AgeTable = ({ header, values }) => {
+export const AgeBlock = ({ header, values }) => {
   const total = values.reduce((acc, cur) => acc + cur.value, 0)
 
   const cats = new Array(AGE_MAX / 5 + 1)
@@ -79,5 +57,3 @@ export const AgeTable = ({ header, values }) => {
     </div>
   )
 }
-
-export default DemogTable
