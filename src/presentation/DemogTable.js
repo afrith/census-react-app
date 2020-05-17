@@ -1,30 +1,31 @@
 import React from 'react'
 import Table from 'react-bootstrap/Table'
+
+import PieChart from './PieChart'
+import { AgeChart } from './BarCharts'
+import TableCollapse from './TableCollapse'
 import { formatInt, formatPerc } from '../lib/formats'
 import { compareString } from '../lib/utils'
 
-const BasicTable = ({ header, values, total }) => (
-  <>
-    <h4>{header}</h4>
-    <Table>
-      <thead>
-        <tr>
-          <th />
-          <th className='text-right'>People</th>
-          <th className='text-right'>Percentage</th>
+const BasicTable = ({ values, total }) => (
+  <Table>
+    <thead>
+      <tr>
+        <th />
+        <th className='text-right'>People</th>
+        <th className='text-right'>Percentage</th>
+      </tr>
+    </thead>
+    <tbody>
+      {values.map(v => (
+        <tr key={v.label}>
+          <td>{v.label}</td>
+          <td className='text-right'>{formatInt(v.value)}</td>
+          <td className='text-right'>{v.label === 'Not applicable' ? '' : formatPerc(v.value / total)}</td>
         </tr>
-      </thead>
-      <tbody>
-        {values.map(v => (
-          <tr key={v.label}>
-            <td>{v.label}</td>
-            <td className='text-right'>{formatInt(v.value)}</td>
-            <td className='text-right'>{v.label === 'Not applicable' ? '' : formatPerc(v.value / total)}</td>
-          </tr>
-        ))}
-      </tbody>
-    </Table>
-  </>
+      ))}
+    </tbody>
+  </Table>
 )
 
 const DemogTable = ({ header, values }) => {
@@ -33,7 +34,20 @@ const DemogTable = ({ header, values }) => {
   const total = applicableValues.reduce((acc, cur) => acc + cur.value, 0)
   const displayValues = [...applicableValues, ...naValues].filter(v => v.value > 0)
 
-  return <BasicTable header={header} values={displayValues} total={total} />
+  return (
+    <div className='pb-3'>
+      <h4>{header}</h4>
+      <div className='d-flex flex-column align-items-center'>
+        <PieChart data={applicableValues} />
+        {(naValues.length > 0 && naValues[0].value > 0) && (
+          <div className='font-italic mb-3'>{formatInt(naValues[0].value)}  "Not applicable" records not included.</div>
+        )}
+      </div>
+      <TableCollapse keyForId={header}>
+        <BasicTable header={header} values={displayValues} total={total} />
+      </TableCollapse>
+    </div>
+  )
 }
 
 const AGE_MAX = 85
@@ -53,7 +67,17 @@ export const AgeTable = ({ header, values }) => {
     value
   }))
 
-  return <BasicTable header={header} values={catValues} total={total} />
+  return (
+    <div className='pb-3'>
+      <h4>{header}</h4>
+      <div className='d-flex flex-column align-items-center'>
+        <AgeChart data={catValues} />
+      </div>
+      <TableCollapse keyForId={header}>
+        <BasicTable header={header} values={catValues} total={total} />
+      </TableCollapse>
+    </div>
+  )
 }
 
 export default DemogTable
