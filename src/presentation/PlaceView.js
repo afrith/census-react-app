@@ -34,7 +34,7 @@ const PlaceInfo = ({ place, map, loading }) => {
         <Col lg={6}>
           <h2>
             {place.name}<br />
-            <small className='text-muted'>{place.type.descrip} {place.code} from Census 2011</small>
+            <small className='text-muted'>{place.type.descrip} {place.code} from Census 2001</small>
           </h2>
 
           {loading
@@ -92,14 +92,14 @@ const PlaceView = ({ place, loading, geom, childGeoms, geomLoading }) => {
   if (!place.code) {
     return (
       <>
-        <Helmet><title>Census 2011</title></Helmet>
+        <Helmet><title>Census 2001</title></Helmet>
         <LoadingSpinner />
       </>
     )
   } else {
     return (
       <>
-        <Helmet><title>{`Census 2011: ${place.type.descrip}: ${place.name}`}</title></Helmet>
+        <Helmet><title>{`Census 2001: ${place.type.descrip}: ${place.name}`}</title></Helmet>
         <PlaceInfo place={place} loading={loading} />
       </>
     )

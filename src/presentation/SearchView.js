@@ -42,14 +42,14 @@ const ResultTable = ({ places }) => {
 const SearchView = ({ name, loading, places }) => {
   return (
     <>
-      <Helmet><title>Census 2011: Search Results: “{name}”</title></Helmet>
+      <Helmet><title>Census 2001: Search Results: “{name}”</title></Helmet>
 
       <Breadcrumb>
         <LinkContainer to='/'><Breadcrumb.Item>Home</Breadcrumb.Item></LinkContainer>
         <Breadcrumb.Item active aria-current='page'>Search for “{name}”</Breadcrumb.Item>
       </Breadcrumb>
 
-      <h2>Census 2011 Search Results for “{name}”</h2>
+      <h2>Census 2001 Search Results for “{name}”</h2>
 
       <div className='my-3'>
         {(!loading && places) ? <ResultTable places={places} /> : <LoadingSpinner />}

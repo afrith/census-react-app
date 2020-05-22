@@ -9,14 +9,14 @@ const BigmapView = ({ loading, place }) => {
   if (loading || !place) {
     return (
       <>
-        <Helmet><title>Census 2011</title></Helmet>
+        <Helmet><title>Census 2001</title></Helmet>
         <LoadingSpinner />
       </>
     )
   } else {
     return (
       <>
-        <Helmet><title>{`Census 2011: ${place.type.descrip}: ${place.name}: Map`}</title></Helmet>
+        <Helmet><title>{`Census 2001: ${place.type.descrip}: ${place.name}: Map`}</title></Helmet>
         <Breadcrumb>
           <LinkContainer to='/'><Breadcrumb.Item>Home</Breadcrumb.Item></LinkContainer>
           {place.fullParents.map(p => <LinkContainer key={p.code} to={`/place/${p.code}`}><Breadcrumb.Item>{p.name}</Breadcrumb.Item></LinkContainer>)}
