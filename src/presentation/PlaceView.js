@@ -8,7 +8,7 @@ import Col from 'react-bootstrap/Col'
 import { keyBy } from 'lodash'
 import { LoadingSpinner } from './spinners'
 import PlaceMap from './PlaceMap'
-import { PieBlock, AgeBlock } from './DemogBlocks'
+import { PieBlock } from './DemogBlocks'
 import ChildrenTable from './ChildrenTable'
 import { formatInt, formatDec } from '../lib/formats'
 
@@ -71,7 +71,6 @@ const PlaceInfo = ({ place, map, loading }) => {
           {place.population > 0 && (
             <Col lg={6}>
               <PieBlock header='Gender' values={keyedVariables.Gender.values} />
-              <AgeBlock header='Age' values={keyedVariables.Age.values} />
               <PieBlock header='Population group' values={keyedVariables['Population group'].values} />
               <PieBlock header='First language' values={keyedVariables['First language'].values} />
             </Col>
