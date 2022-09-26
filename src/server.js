@@ -1,6 +1,6 @@
 import App from './App'
 import React from 'react'
-import { StaticRouter } from 'react-router-dom'
+import { StaticRouter } from 'react-router-dom/server'
 import Koa from 'koa'
 import koaStatic from 'koa-static'
 import koaProxy from 'koa-proxies'
@@ -35,6 +35,14 @@ router.get('/place/:code/kml', async ctx => {
   ctx.set('Content-Type', 'application/vnd.google-earth.kml+xml')
   ctx.set('Content-Disposition', `attachment; filename=${data.placeByCode.code}.kml`)
   ctx.body = kml
+})
+
+router.get('/search', async (ctx, next) => {
+  if (ctx.query.q != null) {
+    ctx.redirect(`/search/${encodeURIComponent(ctx.query.q.trim())}`)
+  } else {
+    ctx.redirect('/')
+  }
 })
 
 router.get('/(.*)',

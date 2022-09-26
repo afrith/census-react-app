@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useHistory } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
@@ -7,12 +7,12 @@ import Tooltip from 'react-bootstrap/Tooltip'
 
 const SearchForm = ({ defaultSearchText = '' }) => {
   const [searchText, setSearchText] = useState(defaultSearchText)
-  const history = useHistory()
+  const navigate = useNavigate()
 
   const handleSubmit = (event) => {
     event.preventDefault()
     event.stopPropagation()
-    if (searchText.trim().length >= 3) history.push(`/search/${encodeURIComponent(searchText.trim())}`)
+    if (searchText.trim().length >= 3) navigate(`/search/${encodeURIComponent(searchText.trim())}`)
   }
 
   return (

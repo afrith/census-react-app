@@ -1,6 +1,5 @@
 import React from 'react'
-import { Route, Switch, Redirect } from 'react-router-dom'
-import { parse } from 'query-string'
+import { Route, Routes } from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'mapbox-gl/dist/mapbox-gl.css'
 import './App.css'
@@ -12,25 +11,19 @@ import SearchContainer from './containers/SearchContainer'
 import ErrorBoundary from './containers/ErrorBoundary'
 import Layout from './presentation/Layout'
 
-const App = () => (
-  <Layout>
-    <ErrorBoundary>
-      <Switch>
-        <Route exact path='/'><HomeContainer /></Route>
-        <Route path='/place/:code/map'><BigmapContainer /></Route>
-        <Route path='/place/:code'><PlaceContainer /></Route>
-        <Route path='/search/:name'><SearchContainer /></Route>
-        <Route
-          path='/search'
-          render={({ location }) => {
-            const query = parse(location.search).q
-            if (query) return <Redirect to={`/search/${encodeURIComponent(query.trim())}`} />
-            else return <Redirect to='/' />
-          }}
-        />
-      </Switch>
-    </ErrorBoundary>
-  </Layout>
-)
+const App = () => {
+  return (
+    <Layout>
+      <ErrorBoundary>
+        <Routes>
+          <Route path='/' element={<HomeContainer />} />
+          <Route path='/place/:code/map' element={<BigmapContainer />} />
+          <Route path='/place/:code' element={<PlaceContainer />} />
+          <Route path='/search/:name' element={<SearchContainer />} />
+        </Routes>
+      </ErrorBoundary>
+    </Layout>
+  )
+}
 
 export default App
