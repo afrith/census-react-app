@@ -14,29 +14,32 @@ const childNames = {
   subplace: 'Small Areas'
 }
 
-const ChildrenTable = ({ place }) => (
-  <>
-    <h4>{childNames[place.type.name]}</h4>
+const ChildrenTable = ({ place }) => {
+  const sortedChildren = [...place.children].sort((a, b) => compareString(a.name.toUpperCase(), b.name.toUpperCase()))
+  return (
+    <>
+      <h4>{childNames[place.type.name]}</h4>
 
-    <Table>
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th className='text-right'>Population</th>
-          <th className='text-right'>Area (km²)</th>
-        </tr>
-      </thead>
-      <tbody>
-        {place.children.sort((a, b) => compareString(a.name.toUpperCase(), b.name.toUpperCase())).map(c => (
-          <tr key={c.code}>
-            <td><Link to={`/place/${c.code}`}>{c.name}</Link></td>
-            <td className='text-right'>{formatInt(c.population)}</td>
-            <td className='text-right'>{formatDec(c.area)}</td>
+      <Table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th className='text-right'>Population</th>
+            <th className='text-right'>Area (km²)</th>
           </tr>
-        ))}
-      </tbody>
-    </Table>
-  </>
-)
+        </thead>
+        <tbody>
+          {sortedChildren.map(c => (
+            <tr key={c.code}>
+              <td><Link to={`/place/${c.code}`}>{c.name}</Link></td>
+              <td className='text-right'>{formatInt(c.population)}</td>
+              <td className='text-right'>{formatDec(c.area)}</td>
+            </tr>
+          ))}
+        </tbody>
+      </Table>
+    </>
+  )
+}
 
 export default ChildrenTable

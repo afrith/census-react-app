@@ -4,9 +4,9 @@ import { StaticRouter } from 'react-router-dom'
 import Koa from 'koa'
 import koaStatic from 'koa-static'
 import koaProxy from 'koa-proxies'
-import koaHelmet from 'koa-helmet'
 import Router from '@koa/router'
-import { ApolloProvider, renderToStringWithData } from 'react-apollo'
+import { ApolloProvider } from '@apollo/client'
+import { renderToStringWithData } from '@apollo/client/react/ssr'
 import { createClient } from './lib/apollo'
 import { HelmetProvider } from 'react-helmet-async'
 import { request as graphqlRequest } from 'graphql-request'
@@ -37,7 +37,7 @@ router.get('/place/:code/kml', async ctx => {
   ctx.body = kml
 })
 
-router.get('/*',
+router.get('/(.*)',
   async (ctx, next) => {
     const context = {}
     const client = createClient()
@@ -81,7 +81,7 @@ router.get('/*',
         </head>
         <body>
             <div id="root">${ctx.state.markup}</div>
-            <script>
+            <script nonce="${ctx.state.nonce}">
               window.__APOLLO_STATE__ = ${JSON.stringify(ctx.state.apolloState).replace(/</g, '\\u003c')}
             </script>
         </body>
@@ -91,7 +91,6 @@ router.get('/*',
 
 const server = new Koa()
 server
-  .use(koaHelmet())
   .use(koaProxy('/graphql', {
     target: process.env.RAZZLE_GRAPHQL_URL,
     changeOrigin: true,

@@ -1,6 +1,6 @@
 import React from 'react'
 import { useParams } from 'react-router-dom'
-import { useQuery } from 'react-apollo'
+import { useQuery } from '@apollo/client'
 import { PLACE_BASIC_BY_CODE, PLACE_BY_CODE } from '../lib/queries'
 import PlaceView from '../presentation/PlaceView'
 import { WarningMessage } from '../presentation/alerts'

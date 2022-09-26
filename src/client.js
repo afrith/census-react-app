@@ -2,7 +2,7 @@ import App from './App'
 import { BrowserRouter } from 'react-router-dom'
 import React from 'react'
 import { hydrate } from 'react-dom'
-import { ApolloProvider } from 'react-apollo'
+import { ApolloProvider } from '@apollo/client'
 import { createClient } from './lib/apollo'
 import { HelmetProvider } from 'react-helmet-async'
 

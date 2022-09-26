@@ -1,5 +1,4 @@
-import { ApolloClient, HttpLink } from 'apollo-boost'
-import { InMemoryCache, defaultDataIdFromObject } from 'apollo-cache-inmemory'
+import { ApolloClient, HttpLink, InMemoryCache, defaultDataIdFromObject } from '@apollo/client'
 
 import fetch from 'isomorphic-fetch'
 

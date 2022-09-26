@@ -1,6 +1,6 @@
 import React from 'react'
 import { useParams } from 'react-router-dom'
-import { useQuery } from 'react-apollo'
+import { useQuery } from '@apollo/client'
 import { PLACE_BY_CODE } from '../lib/queries'
 import BigmapView from '../presentation/BigmapView'
 import { WarningMessage } from '../presentation/alerts'

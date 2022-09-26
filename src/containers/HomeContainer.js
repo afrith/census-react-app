@@ -1,5 +1,5 @@
 import React from 'react'
-import { useQuery } from 'react-apollo'
+import { useQuery } from '@apollo/client'
 import { ALL_PROVINCES } from '../lib/queries'
 import HomeView from '../presentation/HomeView'
 

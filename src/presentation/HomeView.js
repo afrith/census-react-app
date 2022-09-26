@@ -9,26 +9,29 @@ import SearchForm from './SearchForm'
 import { formatInt } from '../lib/formats'
 import { compareString } from '../lib/utils'
 
-const ProvinceTable = ({ provinces }) => (
-  <Table>
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th className='text-right'>Population</th>
-        <th className='text-right'>Area (km²)</th>
-      </tr>
-    </thead>
-    <tbody>
-      {provinces.sort((a, b) => compareString(a.name.toUpperCase(), b.name.toUpperCase())).map(({ code, name, population, area }) => (
-        <tr key={code}>
-          <td><Link to={`/place/${code}`}>{name}</Link></td>
-          <td className='text-right'>{formatInt(population)}</td>
-          <td className='text-right'>{formatInt(area)}</td>
+const ProvinceTable = ({ provinces }) => {
+  const sortedProvinces = [...provinces].sort((a, b) => compareString(a.name.toUpperCase(), b.name.toUpperCase()))
+  return (
+    <Table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th className='text-right'>Population</th>
+          <th className='text-right'>Area (km²)</th>
         </tr>
-      ))}
-    </tbody>
-  </Table>
-)
+      </thead>
+      <tbody>
+        {sortedProvinces.map(({ code, name, population, area }) => (
+          <tr key={code}>
+            <td><Link to={`/place/${code}`}>{name}</Link></td>
+            <td className='text-right'>{formatInt(population)}</td>
+            <td className='text-right'>{formatInt(area)}</td>
+          </tr>
+        ))}
+      </tbody>
+    </Table>
+  )
+}
 
 const HomeView = ({ loading, provinces }) => {
   return (
